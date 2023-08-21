@@ -69,7 +69,7 @@ class _QuizPageState extends State<QuizPage> {
           centerTitle: true,
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 35.0),
               Container(

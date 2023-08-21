@@ -9,7 +9,7 @@ Color fieldColor =const Color(0xdff5eeff);
 Color orangeOne =const Color(0xffe88331);
 
 var a = false;
-var name = 'Yousef';
+String name = '';
 
 
 List<Map<String, dynamic>> questionsss = [
@@ -101,14 +101,14 @@ List<Map<String, dynamic>> questionsss = [
     'correctAnswer': 'Image',
   },
   {
-    'question': 'What is hot reload in Flutter?',
+    'question': 'What is the key configuration file used when building a Flutter project?',
 
-    'answers': ['A feature that provides real-time analytics for the app',
-                'A feature that optimizes the performance of the app',
-                'A feature that automatically saves code changes as they are made',
-                'A feature that allows developers to see the changes they make to the code in real-time'],
+    'answers': ['pubspec.yaml',
+                'pubspec.xml',
+                'config.html',
+                'root.xml'],
 
-    'correctAnswer': 'A feature that allows developers to see the changes they make to the code in real-time',
+    'correctAnswer': 'pubspec.yaml',
   },
 ];
 
