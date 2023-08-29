@@ -172,7 +172,7 @@ class _endPageState extends State<endPage> {
                                       // questionsss[
                                       //         arrayForWrongAnswersIndexes[index]]
                                       //     ['correctAnswer'],
-                                      choosenAnswers[index],
+                                      choosenAnswers[arrayForWrongAnswersIndexes[index]],
                                       overflow: TextOverflow.clip, // ellipsis
                                       textAlign: TextAlign.center,
                                       style: const TextStyle(color: Colors.white)),

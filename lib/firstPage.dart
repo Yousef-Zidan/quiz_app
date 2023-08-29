@@ -15,7 +15,6 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
 
-
   void goToNextQuestion() {
     if (quizNum < questionsss.length - 1) {
       if(checkedAnswer != null){
@@ -61,77 +60,95 @@ class _QuizPageState extends State<QuizPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        backgroundColor: bodyColor,
-        appBar: AppBar(
-          backgroundColor: barColor,
-          title: const Text('Quiz App'),
-          centerTitle: true,
-        ),
-        body: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 35.0),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-                child: Text(
-                  "Quiz : ${quizNum+1}",
-                  style: const TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,color: Colors.white
+        home: Scaffold(
+          backgroundColor: bodyColor,
+          appBar: AppBar(
+            backgroundColor: barColor,
+            title: const Text('Quiz App'),
+            centerTitle: true,
+          ),
+          body: Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 35.0),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+                  child: Text(
+                    "Quiz : ${quizNum+1}",
+                    style: const TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,color: Colors.white
+                    ),
                   ),
                 ),
-              ),
 
-              const Divider(
-                thickness: 2.0,color: Colors.white,
-              ),
-
-              const SizedBox(height: 30.0),
-              Container(
-                margin: const EdgeInsets.all(10),
-                alignment: Alignment.center,
-                child: Text(
-                  questionsss[quizNum]['question'],
-                  overflow: TextOverflow.clip, // ellipsis
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 22.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 30.0),
-              ChoiceButton(label: 'A', text: questionsss[quizNum]['answers'][0], checked: a),
-              ChoiceButton(label: 'B', text: questionsss[quizNum]['answers'][1], checked: a),
-              ChoiceButton(label: 'C', text: questionsss[quizNum]['answers'][2], checked: a),
-              ChoiceButton(label: 'D', text: questionsss[quizNum]['answers'][3], checked: a),
-
-              const SizedBox(height: 30.0),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 12.0),
-                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
-
-                child: MaterialButton(
-                  onPressed: goToNextQuestion,
-
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50)
-                  ),
-                  color: orangeOne,
-                  height: 60,
-                  minWidth: 100,
-                  padding: const EdgeInsets.symmetric(horizontal: 80,vertical: 10),
-                  child: const Text('Next',style: TextStyle(color: Colors.white, fontSize: 20,fontWeight: FontWeight.w600),),
-
+                const Divider(
+                  thickness: 2.0,color: Colors.white,
                 ),
 
-              ),
-            ]
-        ),
-      )
+                const SizedBox(height: 30.0),
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  alignment: Alignment.center,
+                  child: Text(
+                    questionsss[quizNum]['question'],
+                    overflow: TextOverflow.clip, // ellipsis
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 22.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 30.0),
+                ChoiceButton(
+                  label: 'A', text: questionsss[quizNum]['answers'][0],
+                  checked: checkedAnswer == questionsss[quizNum]['answers'][0],
+                  onSelected: () {setState(() {checkedAnswer = questionsss[quizNum]['answers'][0];});},
+                ),
+                ChoiceButton(
+                  label: 'B',
+                  text: questionsss[quizNum]['answers'][1],
+                  checked: checkedAnswer == questionsss[quizNum]['answers'][1],
+                  onSelected: () {setState(() {checkedAnswer = questionsss[quizNum]['answers'][1];});},
+                ),
+                ChoiceButton(
+                  label: 'C', text: questionsss[quizNum]['answers'][2], 
+                  checked: checkedAnswer == questionsss[quizNum]['answers'][2],
+                  onSelected: () {setState(() {checkedAnswer = questionsss[quizNum]['answers'][2];});},
+                ),
+                ChoiceButton(
+                  label: 'D',
+                  text: questionsss[quizNum]['answers'][3],
+                  checked: checkedAnswer == questionsss[quizNum]['answers'][3],
+                  onSelected: () {setState(() {checkedAnswer = questionsss[quizNum]['answers'][3];});},
+                ),
+
+                const SizedBox(height: 30.0),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 12.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+
+                  child: MaterialButton(
+                    onPressed: goToNextQuestion,
+
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50)
+                    ),
+                    color: orangeOne,
+                    height: 60,
+                    minWidth: 100,
+                    padding: const EdgeInsets.symmetric(horizontal: 80,vertical: 10),
+                    child: const Text('Next',style: TextStyle(color: Colors.white, fontSize: 20,fontWeight: FontWeight.w600),),
+
+                  ),
+
+                ),
+              ]
+          ),
+        )
     );
   }
 }
@@ -140,15 +157,25 @@ class _QuizPageState extends State<QuizPage> {
 class ChoiceButton extends StatefulWidget {
   final String label;
   final String text;
-  bool checked;
+  final bool checked;
+  final Function() onSelected;
 
-  ChoiceButton({Key? key, required this.label, required this.text, required this.checked}) : super(key: key);
+  ChoiceButton({
+    required this.label,
+    required this.text,
+    required this.checked,
+    required this.onSelected,
+  });
+
+  //ChoiceButton({Key? key, required this.label, required this.text, required this.checked}) : super(key: key);
 
   @override
   _ChoiceButtonState createState() => _ChoiceButtonState();
 }
 
 class _ChoiceButtonState extends State<ChoiceButton> {
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -164,26 +191,19 @@ class _ChoiceButtonState extends State<ChoiceButton> {
           width: double.infinity,
           child: MaterialButton(
             onPressed: () {
-              setState(() {
-                // a = false;
-                widget.checked = !widget.checked;
-                checkedAnswer = widget.text;
+              widget.onSelected();
                 // print(checkedAnswer);
                 // print(widget.checked);
-              });
             },
             child: Row(
               children: [
                 MaterialButton(
                   onPressed: () {
-                    setState(() {
-                      // a = false;
-                      // print(widgetFactory.toString());
-                      widget.checked = !widget.checked;
-                      checkedAnswer = widget.text;
-                      // print(checkedAnswer);
-                      // print(widget.checked);
-                    });
+
+                    widget.onSelected();
+                    // print(checkedAnswer);
+                    // print(widget.checked);
+
                   },
                   minWidth: 5,
                   color: orangeOne,

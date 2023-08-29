@@ -14,9 +14,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    // Color barColor = const Color(0xff2b3e56);
-    // Color bodyColor = const Color(0xff24283d);
-    // Color orangeOne = const Color(0xffe88331);
     return MaterialApp(
       home: Scaffold(
         backgroundColor: bodyColor,
